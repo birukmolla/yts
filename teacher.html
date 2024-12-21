@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Dashboard</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="shortcut icon" href="assets/logo yts.png" type="image/x-icon">
+    <style>
+      .section {
+        display: none;
+      }
+      .active {
+        display: block;
+      }
+      #chat-box {
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        padding: 10px;
+        width: 100%;
+        height: 500px;
+        overflow-y: auto;
+      }
+
+      #messages {
+        height: 350px;
+        overflow-y: auto;
+        margin-bottom: 10px;
+      }
+      p {
+        font-size: large;
+      }
+    </style>
+</head>
+<body>
+
+<header class="header">
+    <a href="teacher.html" class="logo logo-text">Teacher <span>Dashboard</span></a>
+
+    <i class='bx bx-menu' id="menu-icon"></i>
+
+    <nav class="navbar">
+        <a href="index.html">Home</a>
+        <a href="login.html">Logout</a>
+       </nav>
+</header>
+
+<h2 class="welcome-Mess">Welcome to the <span>Teacher's</span> Dashboard</h2>
+
+  <nav class="sidebar">
+      <h4 class="element" style="font-size: large;"><span>Manage Classes</span></h4>
+      <button id="" class="btn navb">Manage Students</button>
+      <button id="" class="btn navb">Assignments</button>
+      <button id="contact-parent" class="btn navb">Contact Parent</button>
+      <button id="" class="btn navb">All Students</button>
+  </nav>
+
+  <section class="section active container" style="text-align: center; margin-left: 60px;">
+    <div class="welcome-message" style="padding: 0; margin-left: 0;">
+        <p style="margin-top: 70px; margin-left: 0;">Here you can manage your classes, assignments, and student performance.</p>
+    </div>
+  </section>
+
+  <section id="contact-parent-section" class="section">
+    <div id="chat-box">
+      <div id="messages"></div>
+      <input required type="text" id="message-input" placeholder="Type a message..."/>
+      <button id="send-button" class="btn" onclick="
+        const messageInput = document.getElementById('message-input');
+        const message = messageInput.value;
+        if (message) {
+          const messages = JSON.parse(localStorage.getItem('messages')) || [];
+          messages.push(`Teacher: ${message}`);
+          localStorage.setItem('messages', JSON.stringify(messages));
+          loadMessages();
+          messageInput.value = ''; // Clear input field
+        }
+      ">Send</button>
+      <button id="delete-button" class="btn" onclick="
+        deleteMessages();
+      ">Delete Chat History</button>
+    </div>
+  </section>
+
+  <section id="" class="section">
+    
+  </section>
+
+<footer class="footer" style="top: 70px;">
+    
+    <ul class="list">
+      <li>
+      <a href="services.html">Services</a>
+      </li>
+      <li>
+      <a href="about.html">About Us</a>
+      </li>
+      <li>
+    <a href="contact.html">Contact Us</a>
+  </li>
+  <li>
+    <a href="privacy.html">Privacy Policy</a>
+  </li>
+    </ul>
+    <p class="copyright">
+        &copy; 2024 YTS All Rights Reserved
+    </p>
+  </footer>
+
+<script src="js/script.js"></script>
+  <script>
+    function showSection(sectionId) {
+      const sections = document.querySelectorAll('.section');
+      sections.forEach(section => {
+        section.classList.remove('active');
+      });
+      document.getElementById(sectionId).classList.add('active');
+    }
+
+    document.getElementById('contact-parent').addEventListener('click', () => showSection('contact-parent-section'));
+  </script>
+</body>
+</html>

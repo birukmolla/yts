@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="shortcut icon" href="assets/logo yts.png" type="image/x-icon">
+    <style>
+      .select-box {
+          width: 100%;
+          padding: 1.5rem;
+          font-size: 1.6rem;
+          color: var(--text-color);
+          background: var(--bg-color);
+          border-radius: 0.8rem;
+          border: 2px solid var(--main-color);
+          margin: 1rem 0;
+          resize: none;
+      }
+
+      .select-box .selected-option input {
+          width: 100%;
+          padding: 1rem .6rem;
+          font-size: 1.1rem;
+          border: .1rem solid transparent;
+          outline: none;
+      }
+
+      input[type="tel"] {
+          border-radius: 0 .5rem .5rem 0;
+      }
+
+      .select-box input:focus {
+          border: .1rem solid var(--bg-color);
+      }
+
+      .selected-option {
+          background-color: var(--bg-color);
+          border-radius: .5rem;
+          overflow: hidden;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+      }
+
+      .selected-option div{
+          position: relative;
+          width: 6rem;
+          padding: 0 2.8rem 0 .5rem;
+          text-align: center;
+          cursor: pointer;
+      }
+
+      .selected-option div::after{
+          position: absolute;
+          content: "";
+          right: .8rem;
+          top: 50%;
+          transform: translateY(-50%) rotate(45deg);
+          width: .8rem;
+          height: .8rem;
+          border-right: .12rem solid var(--bg-color);
+          border-bottom: .12rem solid var(--bg-color);
+          transition: .2s;
+      }
+
+      .selected-option div.active::after{
+          transform: translateY(-50%) rotate(225deg);
+      }
+
+      .select-box .options {
+          position: absolute;
+          top: 4rem;
+          width: 100%;
+          background-color: var(--main-color);
+          border-radius: .5rem;
+          display: none;
+      }
+
+      .select-box .options.active {
+          display: block;
+      }
+
+      .select-box .options::before {
+          position: absolute;
+          content: "";
+          left: 1rem;
+          top: -1.2rem;
+          width: 0;
+          height: 0;
+          border: .6rem solid transparent;
+          border-bottom-color: var(--primary);
+      }
+
+      .select-box ol {
+          list-style: none;
+          max-height: 23rem;
+          overflow: overlay;
+      }
+
+      .select-box ol::-webkit-scrollbar {
+          width: 0.6rem;
+      }
+
+      .select-box ol::-webkit-scrollbar-thumb {
+          width: 0.4rem;
+          height: 3rem;
+          background-color: var(--main-color);
+          border-radius: .4rem;
+      }
+
+      .select-box ol li {
+          padding: 1rem;
+          display: flex;
+          justify-content: space-between;
+          cursor: pointer;
+      }
+
+      .select-box ol li.hide {
+          display: none;
+      }
+
+      .select-box ol li:not(:last-child) {
+          border-bottom: .1rem solid var(--main-color);
+      }
+
+      .select-box ol li:hover {
+          background-color: var(--bg-color);
+      }
+
+      .select-box ol li .country-name {
+          margin-left: .4rem;
+      }
+    </style>
+</head>
+<body>
+
+<header class="header">
+    <a href="index.html" class="logo logo-text">Yetwlid Tesfa <span>School</span></a>
+
+    <i class='bx bx-menu' id="menu-icon"></i>
+
+    <nav class="navbar">
+        <a href="index.html">Home</a>
+        <a href="login.html">Login</a>
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="contact.html" class="active">Contact</a>
+       </nav>
+</header>
+
+<section class="about" id="about">
+    <div class="about-content">
+    <h2 class="heading">Contact <span>Us</span></h2>
+    <p>Thank you for your interest in Yetwlid Tesfa School. We value open communication and are here to assist you with any questions or inquiries you may have. Whether you are a prospective parent, a current student, or a member of the community, we encourage you to reach out.</p>
+    <p>Our dedicated staff is ready to provide information about our programs, admission process, and any other concerns you may have. You can contact us via phone, email, or by visiting our campus. We welcome your feedback and look forward to connecting with you.</p>
+    <p>Feel free to fill out our contact form below, and we will respond promptly. At YTS, your voice matters, and we are committed to ensuring that every interaction is meaningful and helpful. Together, let’s keep the conversation going as we work towards cultivating a vibrant educational community!</p>
+    <a href="#" class="btn">Read More</a>
+    </div>
+</section>
+
+    <section class="contact" id="contact">
+      <h2 class="heading">Give us your <span>Feedback </span></h2>
+      <form action="#">
+        <div class="input-box">
+            <input type="text" placeholder=" Full name">
+            <input type="email" placeholder="Email">
+            <input type="tel" placeholder="Phone Number">
+        </div>
+
+        <div class="select-box">
+            <div class="selected-option">
+                <div>
+                    <span class="iconify" data-icon="flag:gb-4x3"></span>
+                    <strong>+251</strong>
+                </div>
+                <input type="tel" name="tel" placeholder="Phone Number" class="iputtt">
+            </div>
+            <div class="options">
+                <input type="text" class="search-box" placeholder="Search Country Name">
+                <ol>
+    
+                </ol>
+            </div>
+        </div>
+        
+        <textarea name="" id="" cols="30" rows="10" placeholder="Your Message"></textarea>
+        <input type="submit" value="Send Message" class="btn">
+      </form>
+    </section>
+
+    <footer class="footer">
+        
+        <ul class="list">
+          <li>
+          <a href="services.html">Services</a>
+          </li>
+          <li>
+          <a href="about.html">About Us</a>
+          </li>
+          <li>
+        <a href="contact.html">Contact Us</a>
+      </li>
+      <li>
+        <a href="privacy.html">Privacy Policy</a>
+      </li>
+        </ul>
+        <p class="copyright">
+            &copy; 2024 YTS All Rights Reserved
+        </p>
+      </footer>
+
+<script src="js/script.js"></script>
+</body>
+</html>

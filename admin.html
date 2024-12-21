@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="shortcut icon" href="assets/logo yts.png" type="image/x-icon">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .section {
+            display: none; /* Hide all sections by default */
+        }
+        .active {
+            display: block; /* Show the active section */
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #04fffb;
+            text-align: left;
+        }
+        th {
+            background-color: #111111;
+            color: #04fffb;
+            font-size: middle;
+        }
+        .error-message, .success-message {
+            color: red;
+            margin-top: 10px;
+            font-size: large;
+        }
+        .success-message {
+            color: green;
+            font-size: large;
+        }
+        .pagination {
+            margin-top: 20px;
+        }
+        .pagination button {
+            margin: 0 5px;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="admin.html" class="logo logo-text">Admin <span>Dashboard</span></a>
+    
+        <i class='bx bx-menu' id="menu-icon"></i>
+    
+        <nav class="navbar">
+            <a href="index.html">Home</a>
+            <a href="login.html">Logout</a>
+           </nav>
+    </header>
+    
+    <h2 class="welcome-Mess">Welcome to the <span>Admin's</span> Dashboard</h2>
+
+    <main id="main-content">
+        
+        <nav class="sidebar">
+            <h4 class="element" style="font-size: large;"><span>Manage Users</span></h4>
+
+            <button id="show-add-user" class="btn">Add User</button>
+            <button id="show-all-users" class="btn" style="padding: 8px;">All Users</button>
+        </nav>
+
+        <section class="section active container" style="text-align: center;">
+            <div class="welcome-message" style="text-align: center;">
+                <h2 style="font-size: large;"><span>Welcome back!</span></h2>
+                <p>Thank you for your dedication and leadership in managing our community.</p>
+                <p>Your contributions are vital to our success, and we appreciate your hard work!</p>
+                <p>Ready to get started? You can review user activities and make necessary adjustments today.</p>
+                <p>Don't forget to check for any pending tasks or updates that need your attention.</p>
+                <p>If you have any questions or need support, our team is here to help you every step of the way!</p>
+            </div>
+        </section>
+
+        <section id="add-user-section" class="section">
+            <h3 style="font-size: medium;">Add User</h3>
+            <form id="user-form">
+                <input type="text" id="new-name" placeholder="Full Name" required><br>
+                <input type="text" id="new-username" placeholder="New Username" required><br>
+                <input type="password" id="new-password" placeholder="New Password" required><br>
+                <select id="new-role" class="btn" style="padding: 7px;">
+                    <option value="student">Student</option>
+                    <option value="teacher">Teacher</option>
+                    <option value="librarian">Librarian</option>
+                    <option value="parent">Parent</option>
+                </select>
+                <button type="submit" class="btn" style="margin: 7px;">Add User</button>
+            </form>
+            <p id="user-message" class="error-message"></p>
+            <p id="user-mess" class="success"></p>
+        </section>
+
+        <section id="all-users-section" class="section">
+            <h3 style="font-size: large;">All Users</h3>
+            <input type="text" id="search-bar" placeholder="Search users by Name" oninput="displayUsers()">
+            <table id="user-table">
+                <thead>
+                    <tr>        
+                        <th>Full Name</th>
+                        <th>Username</th>
+                        <th>Password</th>
+                        <th>Role</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="user-list"></tbody>
+            </table>
+            <div class="pagination" id="pagination"></div>
+        </section>
+        
+    </main>
+
+    <footer class="footer">
+  
+        <ul class="list">
+          <li>
+          <a href="services.html">Services</a>
+          </li>
+          <li>
+          <a href="about.html">About Us</a>
+          </li>
+          <li>
+        <a href="contact.html">Contact Us</a>
+      </li>
+      <li>
+        <a href="privacy.html">Privacy Policy</a>
+      </li>
+        </ul>
+        <p class="copyright">
+            &copy; 2024 YTS All Rights Reserved
+        </p>
+      </footer>
+
+    <script>
+        const usersPerPage = 20; // Set number of users per page
+        let currentPage = 1;
+
+        // Define the role hierarchy for sorting
+        const rolePriority = {
+            'superadmin': 1,
+            'admin': 2,
+            'teacher': 3,
+            'librarian': 4,
+            'parent': 5,
+            'student': 6
+        };
+
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById(sectionId).classList.add('active');
+        }
+
+        document.getElementById('show-add-user').addEventListener('click', () => showSection('add-user-section'));
+        document.getElementById('show-all-users').addEventListener('click', () => {
+            showSection('all-users-section');
+            displayUsers(); // Refresh the user list
+        });
+
+        function displayUsers() {
+            const searchQuery = document.getElementById('search-bar').value.toLowerCase();
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            const filteredUsers = users.filter(user => user.name.toLowerCase().includes(searchQuery));
+
+            // Sort users by role based on defined priority
+            filteredUsers.sort((a, b) => {
+                return rolePriority[a.role] - rolePriority[b.role];
+            });
+
+            const userList = document.getElementById('user-list');
+            const pagination = document.getElementById('pagination');
+            userList.innerHTML = ''; // Clear the list
+            pagination.innerHTML = ''; // Clear pagination
+
+            const totalPages = Math.ceil(filteredUsers.length / usersPerPage);
+            const start = (currentPage - 1) * usersPerPage;
+            const end = start + usersPerPage;
+            const paginatedUsers = filteredUsers.slice(start, end);
+
+            paginatedUsers.forEach(user => {
+                const row = document.createElement('tr');
+                const nameCell = document.createElement('td');
+                const usernameCell = document.createElement('td');
+                const passwordCell = document.createElement('td');
+                const roleCell = document.createElement('td');
+                const statusCell = document.createElement('td');
+                const actionsCell = document.createElement('td');
+
+                nameCell.textContent = user.name;
+                usernameCell.textContent = user.username;
+                passwordCell.textContent = user.password; // Note: Displaying passwords in plain text is insecure.
+                roleCell.textContent = user.role;
+                statusCell.textContent = user.active ? 'Active' : 'Inactive';
+
+                const editButton = document.createElement('button');
+                editButton.textContent = 'Edit';
+                editButton.onclick = () => editUser(user.username);
+
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = 'Remove';
+                deleteButton.onclick = () => deleteUser(user.username);
+
+                const superadminStatus = document.createElement('p');
+                superadminStatus.textContent = 'N/A';
+
+                // Disable actions for other admins and superadmin
+                if (user.role == 'admin') {
+                    actionsCell.appendChild(superadminStatus);
+                } else if (user.role == 'superadmin') {
+                    actionsCell.appendChild(superadminStatus);
+                } else {
+                    actionsCell.appendChild(editButton);
+                    actionsCell.appendChild(deleteButton);
+                }
+
+                row.appendChild(nameCell);
+                row.appendChild(usernameCell);
+                row.appendChild(passwordCell);
+                row.appendChild(roleCell);
+                row.appendChild(statusCell);
+                row.appendChild(actionsCell);
+                userList.appendChild(row);
+            });
+
+            for (let i = 1; i <= totalPages; i++) {
+                const button = document.createElement('button');
+                button.textContent = i;
+                button.onclick = () => {
+                    currentPage = i;
+                    displayUsers();
+                };
+                pagination.appendChild(button);
+            }
+        }
+
+        document.getElementById('user-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const name = document.getElementById('new-name').value;
+            const username = document.getElementById('new-username').value;
+            const password = document.getElementById('new-password').value;
+            const role = document.getElementById('new-role').value;
+
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+
+            if (users.some(user => user.username === username)) {
+                document.getElementById('user-message').textContent = 'Username already exists.';
+                return;
+            }
+
+            users.push({ name, username, password, role, active: true });
+            localStorage.setItem('users', JSON.stringify(users));
+            document.getElementById('user-mess').textContent = 'User added successfully!';
+            document.getElementById('user-form').reset(); // Reset the form
+        });
+
+        function editUser(username) {
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            const user = users.find(u => u.username === username);
+
+            if (user) {
+                // Prompt for new name, username, and password
+                const newName = prompt("Enter new name:", user.name);
+                const newUsername = prompt("Enter new username:", user.username);
+                const newPassword = prompt("Enter new password:", user.password);
+
+                // Check for duplicate username
+                if (newUsername && users.some(u => u.username === newUsername && u.username !== username)) {
+                    alert('Username already exists. Please choose a different one.');
+                    return;
+                }
+
+                // Update user data
+                user.name = newName || user.name; // Use new name or keep the old one
+                user.username = newUsername || user.username; // Use new username or keep the old one
+                user.password = newPassword || user.password; // Use new password or keep the old one
+
+                localStorage.setItem('users', JSON.stringify(users));
+                displayUsers(); // Refresh the user list
+            }
+        }
+
+        function deleteUser(username) {
+            let users = JSON.parse(localStorage.getItem('users')) || [];
+            users = users.filter(user => user.username !== username);
+            localStorage.setItem('users', JSON.stringify(users));
+            displayUsers(); // Refresh the user list
+        }
+
+        // Initial display of users
+        displayUsers();
+    </script>
+</body>
+</html>

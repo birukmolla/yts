@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login In</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="shortcut icon" href="assets/logo yts.png" type="image/x-icon">
+</head>
+<body>
+
+<header class="header">
+    <a href="index.html" class="logo logo-text">Yetwlid Tesfa <span>School</span></a>
+
+    <i class='bx bx-menu' id="menu-icon"></i>
+
+    <nav class="navbar">
+        <a href="index.html">Home</a>
+        <a href="login.html" class="active">Login</a>
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="contact.html">Contact</a>
+       </nav>
+</header>
+
+<main id="main-content">
+  <form id="login-form">
+      <div class="form-group">
+          <p for="username" style="font-size: large;">Username</p>
+          <input type="text" id="username" required style="margin-bottom: 20px;">
+      </div>
+      <div class="form-group">
+          <p for="password" style="font-size: large;">Password</p>
+          <input type="password" id="password" required>
+      </div>
+      <div class="form-group">
+        <p id="error-message" class="error-message"></p>
+        <button type="submit" class="btn" style="margin-top: 20px;">Login</button>
+      </div>
+  </form>
+</main>
+
+<footer class="footer">
+  
+  <ul class="list">
+    <li>
+    <a href="services.html">Services</a>
+    </li>
+    <li>
+    <a href="about.html">About Us</a>
+    </li>
+    <li>
+  <a href="contact.html">Contact Us</a>
+</li>
+<li>
+  <a href="privacy.html">Privacy Policy</a>
+</li>
+  </ul>
+  <p class="copyright">
+      &copy; 2024 YTS All Rights Reserved
+  </p>
+</footer>
+
+<script src="js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,215 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 0;
+  text-align: center;
+}
+
+nav ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+nav ul li {
+  display: inline;
+  margin: 0 15px;
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+}
+
+.main-content {
+  margin-top: 100px;
+  padding: 20px;
+  display: flex;
+  flex-grow: 1;
+}
+
+footer {
+  text-align: center;
+  padding: 10px 0;
+  background-color: #f1f1f1;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+}
+
+.error-message {
+  color: red;
+  margin-top: 10px;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  nav ul li {
+      display: block;
+      margin: 5px 0;
+  }
+}
+
+.addButton,
+.navb,
+#show-add-user,
+#show-all-users {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  transition: border-color 0.3s;
+  cursor: pointer;
+}
+
+.addButton:hover,
+.navb:hover,
+#show-add-user:hover,
+#show-all-users:hover {
+  border-color: #4CAF50;
+}
+
+select {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+  transition: border-color 0.3s;
+  cursor: pointer;
+}
+
+select:hover {
+  border-color: #4CAF50; /* Change border color on hover */
+}
+
+select:focus {
+  border-color: #4CAF50; /* Change border color when focused */
+  outline: none; /* Remove default outline */
+  box-shadow: 0 0 5px rgba(76, 175, 80, 0.5); /* Add a shadow for focus effect */
+}
+
+/* Style options within the select */
+option {
+  padding: 10px; /* Padding for options might not work in all browsers */
+  border-radius: 5%;
+}
+
+/* Additional styling for better appearance */
+.actions-cell {
+  display: flex;
+  align-items: center;
+}
+
+#user-mess{
+  color: green;
+  margin-top: 10px;
+}
+
+/* Change border color on focus */
+#search-bar:focus,
+#new-name:focus,
+#new-password:focus,
+#new-username:focus {
+  border-color: #4CAF50; /* Green border on focus */
+  outline: none; /* Remove default outline */
+  box-shadow: 0 0 5px rgba(76, 175, 80, 0.5); /* Add shadow */
+}
+
+/* Optional: Add styles for placeholder text */
+#search-bar::placeholder,
+#new-name::placeholder,
+#new-password::placeholder,
+#new-username::placeholder {
+  color: #999; /* Placeholder text color */
+  opacity: 1; /* Make sure it's fully visible */
+}
+
+.sidebar {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  top: 0;
+  background: rgba(0, 0, 0, 0.6);
+  width: 100px;
+  z-index: 200;
+  margin-right: 20px;
+  padding-top: 5px;
+  padding-left: 5px;
+  text-align: center;
+}
+
+#show-add-user {
+  margin-bottom: 10px;
+}
+
+.element {
+  text-align: center;
+  padding-top: 25px;
+  padding-bottom: 25px;
+}
+
+.welcome-Mess {
+  text-align: center;
+  margin-top: 130px;
+  font-size: x-large;
+}
+
+section {
+  margin-left: 115px;
+}
+
+thead,
+tbody {
+  width: 700px;
+}
+
+table {
+  font-size: medium;
+  width: max-content;
+}
+th {
+  color: #111111;
+  background-color: aqua;
+}
+tr {
+  font-size: medium;
+}
+td {
+  padding: 20px;
+}
+
+.welcome-message p {
+  font-size: medium;
+  margin: 3px;
+}
+.welcome-message h2 {
+  margin-bottom: 10px;
+}
+
+.welcome-message {
+  margin-left: 90px;
+}
+
+thead, tbody {
+  border-color: aqua;
+}
+
+.navb {
+  width: 80px;
+  text-align: center;
+}
